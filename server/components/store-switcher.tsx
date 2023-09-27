@@ -84,7 +84,7 @@ export default function StoreSwitcher({
                 <CommandItem
                   key={store.value}
                   onSelect={() => onStoreSelect(store)}
-                  className="text-sm"
+                  className="text-sm hover:cursor-pointer"
                 >
                   <StoreIcon className="mr-2 h-4 w-4" />
                   {store.label}
