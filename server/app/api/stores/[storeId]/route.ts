@@ -13,7 +13,7 @@ export async function PATCH(
     const { name } = body;
 
     if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 401 });
+      return new NextResponse("Unauthenticated", { status: 403 });
     }
 
     if (!name) {
@@ -36,7 +36,7 @@ export async function PATCH(
 
     return NextResponse.json(store);
   } catch (error) {
-    console.log("STORE_PATCH", error);
+    console.log("[STORE_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
