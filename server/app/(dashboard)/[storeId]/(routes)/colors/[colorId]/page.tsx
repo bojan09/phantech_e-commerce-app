@@ -2,7 +2,7 @@ import prismadb from "@/lib/prismadb";
 import { ColorForm } from "./components/color-form";
 
 const ColorPage = async ({ params }: { params: { sizeId: string } }) => {
-  const color = await prismadb.color.findUnique({
+  const colors = await prismadb.color.findMany({
     where: {
       id: params.sizeId,
     },
@@ -11,7 +11,7 @@ const ColorPage = async ({ params }: { params: { sizeId: string } }) => {
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <ColorForm initialData={color} />
+        <ColorForm initialData={colors} />
       </div>
     </div>
   );
