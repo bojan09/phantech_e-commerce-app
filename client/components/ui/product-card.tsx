@@ -11,6 +11,7 @@ import { Expand, ShoppingCart } from "lucide-react";
 import IconButton from "./icon-button";
 import Currency from "./currency";
 import usePreviewModal from "@/hooks/use-preview-modal";
+import useCart from "@/hooks/use-card";
 
 interface ProductCard {
   data: Product;
@@ -19,6 +20,7 @@ interface ProductCard {
 const ProductCard: React.FC<ProductCard> = ({ data }) => {
   const router = useRouter();
   const previewModal = usePreviewModal();
+  const cart = useCart();
 
   const handleClick = () => {
     router.push(`/product/${data?.id}`);
