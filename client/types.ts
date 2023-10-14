@@ -19,7 +19,6 @@ export interface Billboard {
   label: string;
   imgUrl: string;
 }
-
 export interface Category {
   id: string;
   name: string;
