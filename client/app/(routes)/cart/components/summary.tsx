@@ -7,11 +7,23 @@ import { useSearchParams } from "next/navigation";
 import Button from "@/components/ui/button";
 import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-card";
+import toast from "react-hot-toast";
 
 const Summary = () => {
   const items = useCart((state) => state.items);
   const removeAll = useCart((state) => state.removeAll);
   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("success")) {
+      toast.success("Payment completed");
+      removeAll;
+    }
+    if (searchParams.get("canceled")) {
+      toast.error("Something went wrong");
+    }
+  }, [searchParams, removeAll]);
+
   const totalPrice = items.reduce((total, item) => {
     return total + Number(item.price);
   }, 0);
