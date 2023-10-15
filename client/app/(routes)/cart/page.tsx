@@ -1,53 +1,47 @@
-import Image from "next/image";
-import { toast } from "react-hot-toast";
-import { X } from "lucide-react";
+"use client";
 
-import IconButton from "@/components/ui/icon-button";
-import Currency from "@/components/ui/currency";
+import { useEffect, useState } from "react";
+
+import Container from "@/components/ui/container";
 import useCart from "@/hooks/use-card";
-import { Product } from "@/types";
 
-interface CartItemProps {
-  data: Product;
-}
+import CartItem from "./components/cart-item";
 
-const CartItem: React.FC<CartItemProps> = ({ data }) => {
+export const revalidate = 0;
+
+const CartPage = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const cart = useCart();
 
-  const onRemove = () => {
-    cart.removeItem(data.id);
-  };
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
-    <li className="flex py-6 border-b">
-      <div className="relative h-24 w-24 rounded-md overflow-hidden sm:h-48 sm:w-48">
-        <Image
-          fill
-          src={data.images[0].url}
-          alt=""
-          className="object-cover object-center"
-        />
-      </div>
-      <div className="relative ml-4 flex flex-1 flex-col justify-between sm:ml-6">
-        <div className="absolute z-10 right-0 top-0">
-          <IconButton onClick={onRemove} icon={<X size={15} />} />
-        </div>
-        <div className="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
-          <div className="flex justify-between">
-            <p className=" text-lg font-semibold text-black">{data.name}</p>
+    <div className="bg-white">
+      <Container>
+        <div className="px-4 py-16 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-black">Shopping Cart</h1>
+          <div className="mt-12 lg:grid lg:grid-cols-12 lg:items-start gap-x-12">
+            <div className="lg:col-span-7">
+              {cart.items.length === 0 && (
+                <p className="text-neutral-500">No items added to cart.</p>
+              )}
+              <ul>
+                {cart.items.map((item) => (
+                  <CartItem key={item.id} data={item} />
+                ))}
+              </ul>
+            </div>
           </div>
-
-          <div className="mt-1 flex text-sm">
-            <p className="text-gray-500">{data.color.name}</p>
-            <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500">
-              {data.size.name}
-            </p>
-          </div>
-          <Currency value={data.price} />
         </div>
-      </div>
-    </li>
+      </Container>
+    </div>
   );
 };
 
-export default CartItem;
+export default CartPage;
