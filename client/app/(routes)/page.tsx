@@ -1,15 +1,14 @@
-import Container from "@/components/ui/container";
-import Billboard from "@/components/billboard";
-import ProductList from "@/components/product-list";
-
 import getBillboard from "@/actions/get-billboard";
 import getProducts from "@/actions/get-products";
+import ProductList from "@/components/product-list";
+import Billboard from "@/components/billboard";
+import Container from "@/components/ui/container";
 
 export const revalidate = 0;
 
 const HomePage = async () => {
   const products = await getProducts({ isFeatured: true });
-  const billboard = await getBillboard("c449f0f4-9c93-4ba4-a6be-d5fcd60fc1c0");
+  const billboard = await getBillboard("0e12e5cf-29ab-4529-b8d5-c5371dae1f7b");
 
   return (
     <Container>
