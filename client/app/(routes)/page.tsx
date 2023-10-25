@@ -9,7 +9,7 @@ export const revalidate = 0;
 const HomePage = async () => {
   const products = await getProducts({ isFeatured: true });
   const billboard = await getBillboard(
-    `${process.env.NEXT_PUBLIC_API_URL}/billboards`
+    `${process.env.NEXT_PUBLIC_ADMIN_BILLBOARD}`
   );
 
   return (
