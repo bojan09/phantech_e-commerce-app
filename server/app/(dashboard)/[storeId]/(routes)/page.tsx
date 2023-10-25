@@ -1,9 +1,10 @@
+import { formatter } from "@/lib/utils";
+import { CreditCard, DollarSign, Package2Icon } from "lucide-react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import prismadb from "@/lib/prismadb";
-import { formatter } from "@/lib/utils";
-import { CreditCard, DollarSign, Package2Icon } from "lucide-react";
+import { Overview } from "@/components/overview";
 
 import { getTotalRevenue } from "@/actions/get-total-revenue";
 import { getSalesCount } from "@/actions/get-sales-count";
@@ -63,6 +64,14 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
             </CardContent>
           </Card>
         </div>
+        <Card className="col-span-4">
+          <CardHeader>
+            <CardTitle>Overview</CardTitle>
+            <CardContent className="pl-2">
+              <Overview data={[]} />
+            </CardContent>
+          </CardHeader>
+        </Card>
       </div>
     </div>
   );
