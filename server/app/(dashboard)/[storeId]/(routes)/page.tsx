@@ -6,6 +6,8 @@ import { formatter } from "@/lib/utils";
 import { CreditCard, DollarSign, Package2Icon } from "lucide-react";
 
 import { getTotalRevenue } from "@/actions/get-total-revenue";
+import { getSalesCount } from "@/actions/get-sales-count";
+import { getStockCount } from "@/actions/get-stock-count";
 
 interface DashboardPageProps {
   params: { storeId: string };
@@ -13,8 +15,8 @@ interface DashboardPageProps {
 
 const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
   const totalRevenue = await getTotalRevenue(params.storeId);
-  const salesCount = () => {};
-  const stockCount = () => {};
+  const salesCount = await getSalesCount(params.storeId);
+  const stockCount = await getStockCount(params.storeId);
 
   return (
     <div className="flex-col">
@@ -44,7 +46,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
             </CardHeader>
 
             <CardContent>
-              <div className="text-2xl font-bold">+25</div>
+              <div className="text-2xl font-bold">+{salesCount}</div>
             </CardContent>
           </Card>
 
@@ -57,7 +59,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
             </CardHeader>
 
             <CardContent>
-              <div className="text-2xl font-bold">13</div>
+              <div className="text-2xl font-bold">{stockCount}</div>
             </CardContent>
           </Card>
         </div>
